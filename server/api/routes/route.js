@@ -24,9 +24,14 @@ module.exports = function (app) {
 
     // get post para usuario
     app
-        .route("/usuario")
+        .route("/usuarios")
         .get(controller.todosUsuarios)
         .post(controller.addUser);
+
+    // get para usuario com certo id
+    app
+        .route("/usuario/:id")
+        .get(controller.idUsuarios)
 
     // get post para lista
     app
@@ -34,8 +39,12 @@ module.exports = function (app) {
         .get(controller.todasListas)
         .post(controller.addLista);
 
-        // get post para lista
+    // get para lista com usuario
     app
-        .route("/lista/:id")
-        .get(controller.idListaa)
+        .route("/lista/:user")
+        .get(controller.userLista)
+
+    app
+        .route("/lista/update/:id")
+        .put(controller.updateLista);
 };

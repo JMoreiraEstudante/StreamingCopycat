@@ -14,9 +14,9 @@ exports.todasListas = (req, res) => {
     });
 };
 
-//pegando todas as listas
-exports.idListaa = (req, res) => {
-    Lista.find({'_id':req.params.id}, (err, todo) => {
+//pegando a lista de um certo usuario
+exports.userLista = (req, res) => {
+    Lista.findOne({'user':req.params.user}, (err, todo) => {
         if (err) {
             res.status(500).send(err);
         }
@@ -35,6 +35,16 @@ exports.addLista = (req, res) => {
     });
 };
 
+//adicioando um video a uma lista
+exports.updateLista = (req, res) => {
+    Lista.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }, (err, todo) => {
+        if (err) {
+            res.status(500).send(err);
+        }
+        res.status(200).json(todo);
+    });
+};
+
 //pegando todos os videos
 exports.todosVideos = (req, res) => {
     Video.find({}, (err, todo) => {
@@ -47,7 +57,6 @@ exports.todosVideos = (req, res) => {
 
 //pegando todos os videos
 exports.nomeVideos = (req, res) => {
-    console.log(req.params.nome)
     Video.find({'nome':req.params.nome}, (err, todo) => {
         if (err) {
             res.status(500).send(err);
@@ -58,7 +67,6 @@ exports.nomeVideos = (req, res) => {
 
 //pegando todos os videos
 exports.categoriaVideos = (req, res) => {
-    console.log(req.params.categoria)
     Video.find({categoria: { $elemMatch: {$eq: req.params.categoria} }}, (err, todo) => {
         if (err) {
             res.status(500).send(err);
@@ -70,6 +78,16 @@ exports.categoriaVideos = (req, res) => {
 //pegando todos os usuarios
 exports.todosUsuarios = (req, res) => {
     User.find({}, (err, todo) => {
+        if (err) {
+            res.status(500).send(err);
+        }
+        res.status(200).json(todo);
+    });
+};
+
+//pegando um user por nome
+exports.idUsuarios = (req, res) => {
+    User.findOne({'_id':req.params.id}, (err, todo) => {
         if (err) {
             res.status(500).send(err);
         }

@@ -13,7 +13,6 @@ const ListaSchema = new Schema({
     },
     video: [{
         type: String,
-        required: true
     }],
 });
 
