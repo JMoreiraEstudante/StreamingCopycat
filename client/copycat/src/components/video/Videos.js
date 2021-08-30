@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useState, useEffect } from "react"
 import Slider from "react-slick";
 
 import Video from "./Video"
@@ -10,14 +10,30 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const Videos = (props) => {
+    const [width, setWidth] = useState(window.innerWidth);
     const listCtx = useContext(ListContext)
     const userCtx = useContext(UserContext)
 
+    function handleWindowSizeChange() {
+        setWidth(window.innerWidth);
+    }
+
+    useEffect(() => {
+        window.addEventListener('resize', handleWindowSizeChange);
+        return () => {
+            window.removeEventListener('resize', handleWindowSizeChange);
+        }
+    }, []);
+    
+    let show=0
+    if  (width <= 768) show = 3 
+    else show = 6
+    
     var settings = {
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: 6,
+        slidesToShow:  show,
         slidesToScroll: 3
     };
 
@@ -60,7 +76,7 @@ const Videos = (props) => {
                         })}
                     </Slider>
                 </div>
-                :<div className={classes.videosMenor6}>
+                : <div className={classes.videosMenor6}>
                     {props.videos.map((video) => {
                         return <Video key={video._id} video={video} list={list} updateList={updateList} />
                     })}

@@ -1,10 +1,20 @@
-.videosMaior6 {
+@media (max-width: 768px) {
+  .videosMaior6 {
+    width: 350px;
+    margin: 0 auto;
+    padding-bottom: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .videosMaior6 {
     width: 680px;
     margin: 0 auto;
     padding-bottom: 20px;
+  }
 }
 
 .videosMenor6 {
-    width: 66vw;
-    margin: 0 auto;
+  width: 66vw;
+  margin: 0 auto;
 }
