@@ -25,14 +25,14 @@ const MyListPage = () => {
 
     //get todos videos
     const fetchVideos = async () => {
-        const res = await fetch('http://localhost:3001/video')
+        const res = await fetch('https://api-copycat.herokuapp.com/video')
         const data = await res.json()
         return data
     }
 
     //get list
     const fetchList = async (id) => {
-        const res = await fetch(`http://localhost:3001/lista/${userCtx.user}`)
+        const res = await fetch(`https://api-copycat.herokuapp.com/lista/${userCtx.user}`)
         const data = await res.json()
         return data
     }

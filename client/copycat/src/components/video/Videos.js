@@ -23,7 +23,7 @@ const Videos = (props) => {
 
     //get list
     const fetchList = async (id) => {
-        const res = await fetch(`http://localhost:3001/lista/${userCtx.user}`)
+        const res = await fetch(`https://api-copycat.herokuapp.com/lista/${userCtx.user}`)
         const data = await res.json()
         return data
     }
@@ -35,7 +35,7 @@ const Videos = (props) => {
         })
         if (index === -1) userList.video.push(video._id)
         else userList.video.splice(index, 1);
-        const res = await fetch(`http://localhost:3001/lista/update/${userList._id}`, {
+        const res = await fetch(`https://api-copycat.herokuapp.com/lista/update/${userList._id}`, {
             method: 'PUT',
             headers: {
                 'Content-type': 'application/json'

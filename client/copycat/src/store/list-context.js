@@ -28,7 +28,7 @@ export function ListContextProvider(props){
 
     //get list
     const fetchList = async () => {
-        const res = await fetch(`http://localhost:3001/lista/${userCtx.user}`)
+        const res = await fetch(`https://api-copycat.herokuapp.com/lista/${userCtx.user}`)
         const data = await res.json()
         return data
     }

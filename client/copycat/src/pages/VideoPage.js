@@ -21,7 +21,7 @@ const VideoPage = (props) => {
 
     //get video
     const fetchVideo = async () => {
-        const res = await fetch(`http://localhost:3001/video/id/${videoCtx.video}`)
+        const res = await fetch(`https://api-copycat.herokuapp.com/video/id/${videoCtx.video}`)
         const data = await res.json()
         return data
     }

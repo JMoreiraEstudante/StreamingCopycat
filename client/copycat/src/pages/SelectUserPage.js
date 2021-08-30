@@ -17,7 +17,7 @@ const SelectUserPage = () => {
 
     //get todos
     const fetchUsers = async () => {
-        const res = await fetch('http://localhost:3001/usuarios')
+        const res = await fetch('https://api-copycat.herokuapp.com/usuarios')
         const data = await res.json()
         return data
     }

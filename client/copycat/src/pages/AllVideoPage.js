@@ -89,67 +89,67 @@ const AllVideoPage = () => {
 
     //get todos videos
     const fetchVideos = async () => {
-        const res = await fetch('http://localhost:3001/video')
+        const res = await fetch('https://api-copycat.herokuapp.com/video')
         const data = await res.json()
         return data
     }
 
     const fetchVideosAcao = async () => {
-        const res = await fetch('http://localhost:3001/video/categoria/Acao')
+        const res = await fetch('https://api-copycat.herokuapp.com/video/categoria/Acao')
         const data = await res.json()
         return data
     }
 
     const fetchVideosAnimacao = async () => {
-        const res = await fetch('http://localhost:3001/video/categoria/Animacao')
+        const res = await fetch('https://api-copycat.herokuapp.com/video/categoria/Animacao')
         const data = await res.json()
         return data
     }
 
     const fetchVideosComedia = async () => {
-        const res = await fetch('http://localhost:3001/video/categoria/Comedia')
+        const res = await fetch('https://api-copycat.herokuapp.com/video/categoria/Comedia')
         const data = await res.json()
         return data
     }
 
     const fetchVideosPolicial = async () => {
-        const res = await fetch('http://localhost:3001/video/categoria/Policial')
+        const res = await fetch('https://api-copycat.herokuapp.com/video/categoria/Policial')
         const data = await res.json()
         return data
     }
 
     const fetchVideosDocumentario = async () => {
-        const res = await fetch('http://localhost:3001/video/categoria/Documentario')
+        const res = await fetch('https://api-copycat.herokuapp.com/video/categoria/Documentario')
         const data = await res.json()
         return data
     }
 
     const fetchVideosDrama = async () => {
-        const res = await fetch('http://localhost:3001/video/categoria/Drama')
+        const res = await fetch('https://api-copycat.herokuapp.com/video/categoria/Drama')
         const data = await res.json()
         return data
     }
 
     const fetchVideosFiccaoCientifica = async () => {
-        const res = await fetch('http://localhost:3001/video/categoria/Ficcao Cientifica')
+        const res = await fetch('https://api-copycat.herokuapp.com/video/categoria/Ficcao Cientifica')
         const data = await res.json()
         return data
     }
 
     const fetchVideosTerror = async () => {
-        const res = await fetch('http://localhost:3001/video/categoria/Terror')
+        const res = await fetch('https://api-copycat.herokuapp.com/video/categoria/Terror')
         const data = await res.json()
         return data
     }
 
     const fetchVideosFamilia = async () => {
-        const res = await fetch('http://localhost:3001/video/categoria/Familia')
+        const res = await fetch('https://api-copycat.herokuapp.com/video/categoria/Familia')
         const data = await res.json()
         return data
     }
 
     const fetchVideosRomance = async () => {
-        const res = await fetch('http://localhost:3001/video/categoria/Romance')
+        const res = await fetch('https://api-copycat.herokuapp.com/video/categoria/Romance')
         const data = await res.json()
         return data
     }
