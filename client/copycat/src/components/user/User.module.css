@@ -1,0 +1,16 @@
+.user {
+  list-style-type: none; /* Remove bullets */
+  padding: 0; /* Remove padding */
+  margin: 12vh 0; /* Remove margins */ 
+}
+
+.nome {
+  text-align: center;
+}
+
+.user svg {
+  width: 60px;
+  height: auto;
+}
+
+

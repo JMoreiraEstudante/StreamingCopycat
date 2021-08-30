@@ -65,6 +65,16 @@ exports.nomeVideos = (req, res) => {
     });
 };
 
+//pegando um video
+exports.detailVideo = (req, res) => {
+    Video.findOne({'_id':req.params.id}, (err, todo) => {
+        if (err) {
+            res.status(500).send(err);
+        }
+        res.status(200).json(todo);
+    });
+};
+
 //pegando todos os videos
 exports.categoriaVideos = (req, res) => {
     Video.find({categoria: { $elemMatch: {$eq: req.params.categoria} }}, (err, todo) => {

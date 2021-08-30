@@ -8,7 +8,7 @@ const Users = (props) => {
         <ul className={classes.list}>
             {props.users.map((user) => {
                 return (
-                    <Link to='video' key={user._id}>
+                    <Link className={classes.link} to='video' key={user._id}>
                         <User 
                             id={user._id}
                             nome={user.nome}

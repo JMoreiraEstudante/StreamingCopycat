@@ -1,0 +1,15 @@
+.favorito svg {
+  fill: rgb(255, 247, 0);
+  width: 1.8rem;
+  padding-bottom: 6px;
+}
+
+.page {
+    width:auto;
+    height: 100vh;
+}
+
+.favorito h1 {
+  text-align: center;
+  padding-bottom: 15px;
+}

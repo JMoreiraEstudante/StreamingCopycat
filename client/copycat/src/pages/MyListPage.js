@@ -1,8 +1,11 @@
 import { useState, useEffect, useContext } from "react"
-import { Link } from "react-router-dom"
+import { FaStar } from 'react-icons/fa'
 
 import Videos from "../components/video/Videos"
 import UserContext from "../store/user-context"
+import Header from "../components/ui/Header"
+import Layout from "../components/ui/Layout"
+import classes from "./MyListPage.module.css"
 
 const MyListPage = () => {
     const userCtx = useContext(UserContext)
@@ -12,7 +15,7 @@ const MyListPage = () => {
         const getVideos = async () => {
             const videosFromserver = await fetchVideos()
             const listFromServer = await fetchList()
-            const myList = videosFromserver.filter((video)=>{
+            const myList = videosFromserver.filter((video) => {
                 return listFromServer.video.includes(video._id)
             })
             setVideos(myList)
@@ -36,9 +39,15 @@ const MyListPage = () => {
 
     return (
         <div>
-            <Link to='/video'>Videos</Link>
-            <h1>Tela para visualizar a lista do usuário</h1>
-            <Videos videos={videos}/>
+            <Header />
+            <Layout>
+                <div className={classes.page}>
+                    <div className={classes.favorito}>
+                        <h1> <FaStar /> Minha Lista <FaStar /></h1>
+                    </div>
+                    <Videos videos={videos} />
+                </div>
+            </Layout>
         </div>
     )
 }

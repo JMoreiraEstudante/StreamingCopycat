@@ -1,0 +1,9 @@
+.page {
+    width:auto;
+    height: 100vh;
+}
+
+.msg {
+    font-size: 50px;
+    text-align: center;
+}

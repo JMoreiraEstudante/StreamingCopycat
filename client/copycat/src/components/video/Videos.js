@@ -1,12 +1,25 @@
-import {useContext } from "react"
+import { useContext } from "react"
+import Slider from "react-slick";
 
 import Video from "./Video"
 import ListContext from "../../store/list-context"
 import UserContext from "../../store/user-context"
+import classes from './Videos.module.css'
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const Videos = (props) => {
     const listCtx = useContext(ListContext)
     const userCtx = useContext(UserContext)
+
+    var settings = {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 6,
+        slidesToScroll: 3
+    };
 
     //get list
     const fetchList = async (id) => {
@@ -34,13 +47,25 @@ const Videos = (props) => {
     }
 
     let list = []
-    if(!listCtx.loading)
+    if (!listCtx.loading)
         list = listCtx.videos
     return (
+
         <div>
-            {props.videos.map((video) => {
-               return <Video key={video._id} video={video} list={list} updateList={updateList}/>
-            })}
+            {props.videos.length > 6
+                ? <div className={classes.videosMaior6}>
+                    <Slider {...settings}>
+                        {props.videos.map((video) => {
+                            return <Video key={video._id} video={video} list={list} updateList={updateList} />
+                        })}
+                    </Slider>
+                </div>
+                :<div className={classes.videosMenor6}>
+                    {props.videos.map((video) => {
+                        return <Video key={video._id} video={video} list={list} updateList={updateList} />
+                    })}
+                </div>
+            }
         </div>
     )
 }

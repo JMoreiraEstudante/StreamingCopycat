@@ -1,0 +1,16 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans&display=swap');
+
+body {
+    background: rgb(0,0,0);
+    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(2,2,47,1) 40%, rgb(5, 5, 83) 100%);
+    font-family: 'Encode Sans', sans-serif!important;
+}
+
+h1, h2, h3, h4, h5, h6, a, p {
+    color: whitesmoke 
+}
+
+a:hover{
+    text-decoration: none;
+}

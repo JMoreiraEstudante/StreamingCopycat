@@ -12,10 +12,15 @@ module.exports = function (app) {
         .get(controller.todosVideos)
         .post(controller.addVideo);
 
-    // get nome de video
+    // get video por nome
     app
         .route("/video/nome/:nome")
         .get(controller.nomeVideos)
+
+    // get video por id
+    app
+        .route("/video/id/:id")
+        .get(controller.detailVideo)
 
     // get categoria de video
     app

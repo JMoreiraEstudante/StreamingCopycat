@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 
 import Users from "../components/user/Users"
+import classes from "./SelectUserPage.module.css"
 
 const SelectUserPage = () => {
     const [users, setUsers] = useState([])
@@ -22,7 +23,8 @@ const SelectUserPage = () => {
     }
 
     return (
-        <div>
+        <div className={classes.page}>   
+            <h1 className={classes.msg}>Quem está assistindo?</h1>
             <Users users={users}/>
         </div>
     )

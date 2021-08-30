@@ -1,0 +1,18 @@
+.page {
+    width:auto;
+    height: 100vh;
+}
+
+.center {
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+.descricao {
+    display: flex;
+    flex-direction: row;
+}
+
+.descricao p {
+    padding-left: 10px;
+}
