@@ -23,7 +23,7 @@
 }
 
 /*27X40*/
-img {
+.videoImg {
   width: 104px;
   height: 160px;
   object-fit: cover;

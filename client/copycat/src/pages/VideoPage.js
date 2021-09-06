@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react"
-import { Container } from 'react-bootstrap';
+import { Container, Card } from 'react-bootstrap';
 
 import Header from "../components/ui/Header"
 import Layout from "../components/ui/Layout"
@@ -31,10 +31,22 @@ const VideoPage = (props) => {
             <Header />
             <Layout>
                 <Container className={classes.page}>
-                    <h1 className={classes.center}>{video.nome}</h1>
                     <div className={classes.descricao}>
                         <img src={video.image} alt=" erro" />
-                        <p>{video.descricao}</p>
+                        <Card style={
+                            {   
+                                width: '40vw', 
+                                minWidth: '320px',
+                                paddingTop: '25px',
+                                backgroundColor: 'white',
+                                opacity: '0.9',
+                            }
+                        }>
+                            <Card.Body>
+                                <Card.Title> <h2 style={{textAlign: 'center'}}>{video.nome}</h2></Card.Title>
+                                <Card.Text>{video.descricao}</Card.Text>
+                            </Card.Body>
+                        </Card>
                     </div>
                 </Container>
             </Layout>

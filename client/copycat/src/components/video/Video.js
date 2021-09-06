@@ -15,7 +15,7 @@ const Video = ({ video, list, updateList }) => {
     return (
         <div className={classes.video}>
             <Link to='/video-detail'>
-                <img src={video.image} alt=" erro" onClick={toggleVideoSelected} />
+                <img className={classes.videoImg} src={video.image} alt=" erro" onClick={toggleVideoSelected} />
             </Link>
             {list.includes(video._id)
                 ? <FaStar onClick={() => updateList(video)} />

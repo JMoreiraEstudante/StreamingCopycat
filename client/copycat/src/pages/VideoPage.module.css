@@ -1,18 +1,24 @@
 .page {
-    width:auto;
-    height: 100vh;
-}
-
-.center {
-    text-align: center;
-    padding-bottom: 15px;
+  width: auto;
+  height: 120vh;
 }
 
 .descricao {
-    display: flex;
-    flex-direction: row;
+  width: 50%;
+  min-width: 320px;
+  margin: 0 auto;
 }
 
-.descricao p {
-    padding-left: 10px;
+/*27X40*/
+.descricao img {
+  width: 208px;
+  height: 320px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.descricao p,
+.descricao h2 {
+  color: black;
 }

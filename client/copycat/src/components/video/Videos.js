@@ -28,7 +28,7 @@ const Videos = (props) => {
     let show=0
     if  (width <= 768) show = 3 
     else show = 6
-    
+
     var settings = {
         dots: false,
         infinite: true,
@@ -38,7 +38,7 @@ const Videos = (props) => {
     };
 
     //get list
-    const fetchList = async (id) => {
+    const fetchList = async () => {
         const res = await fetch(`https://api-copycat.herokuapp.com/lista/${userCtx.user}`)
         const data = await res.json()
         return data
