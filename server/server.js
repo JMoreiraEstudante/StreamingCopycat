@@ -12,7 +12,7 @@ const app = express();
 // define port to run express app
 const port = process.env.PORT || 3001;
 
-// use bodyParser middleware on express app
+// use bodyParser equivalent middleware on express app
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 

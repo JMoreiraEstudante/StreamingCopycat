@@ -1,155 +1,47 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useDebugValue } from "react"
 
 import Videos from "../components/video/Videos"
 import Header from "../components/ui/Header"
 import Layout from "../components/ui/Layout"
 import classes from "./AllVideoPage.module.css"
 
-const AllVideoPage = () => {
-    const [videos, setVideos] = useState([])
-    const [videosAcao, setVideosAcao] = useState([])
-    const [videosAnimacao, setVideosAnimacao] = useState([])
-    const [videosComedia, setVideosComedia] = useState([])
-    const [videosPolicial, setVideosPolicial] = useState([])
-    const [videosDocumentario, setVideosDocumentario] = useState([])
-    const [videosDrama, setVideosDrama] = useState([])
-    const [videosFiccaoCientifica, setVideosFiccaoCientifica] = useState([])
-    const [videosTerror, setVideosTerror] = useState([])
-    const [videosFamilia, setVideosFamilia] = useState([])
-    const [videosRomance, setVideosRomance] = useState([])
+//custom hook para display de video com um genero especifico
+function useDisplayVideo(genero){
+    const [videoGenero, setVideoGenero] = useState([])
 
     useEffect(() => {
+        const getVideosGenero = async () => {
+            const videosFromserver = await fetchVideosGenero()
+            setVideoGenero(videosFromserver)
+        }
+        getVideosGenero()
+    }, [])
+
+    const fetchVideosGenero = async () => {
+        const res = await fetch(`https://api-copycat.herokuapp.com/video/categoria/${genero}`)
+        const data = await res.json()
+        return data
+    }
+
+    useDebugValue(videoGenero ?? 'loading...')
+
+    return videoGenero
+}
+
+const AllVideoPage = () => {
+    const [videos, setVideos] = useState([])
+        useEffect(() => {
         const getVideos = async () => {
             const videosFromserver = await fetchVideos()
             setVideos(videosFromserver)
         }
 
-        const getVideosAcao = async () => {
-            const videosFromserver = await fetchVideosAcao()
-            setVideosAcao(videosFromserver)
-        }
-
-        const getVideosAnimacao = async () => {
-            const videosFromserver = await fetchVideosAnimacao()
-            setVideosAnimacao(videosFromserver)
-        }
-
-        const getVideosComedia = async () => {
-            const videosFromserver = await fetchVideosComedia()
-            setVideosComedia(videosFromserver)
-        }
-
-        const getVideosPolicial = async () => {
-            const videosFromserver = await fetchVideosPolicial()
-            setVideosPolicial(videosFromserver)
-        }
-
-        const getVideosDocumentario = async () => {
-            const videosFromserver = await fetchVideosDocumentario()
-            setVideosDocumentario(videosFromserver)
-        }
-
-        const getVideosDrama = async () => {
-            const videosFromserver = await fetchVideosDrama()
-            setVideosDrama(videosFromserver)
-        }
-
-        const getVideosFiccaoCientifica = async () => {
-            const videosFromserver = await fetchVideosFiccaoCientifica()
-            setVideosFiccaoCientifica(videosFromserver)
-        }
-
-        const getVideosTerror = async () => {
-            const videosFromserver = await fetchVideosTerror()
-            setVideosTerror(videosFromserver)
-        }
-
-        const getVideosFamilia = async () => {
-            const videosFromserver = await fetchVideosFamilia()
-            setVideosFamilia(videosFromserver)
-        }
-
-        const getVideosRomance = async () => {
-            const videosFromserver = await fetchVideosRomance()
-            setVideosRomance(videosFromserver)
-        }
-
         getVideos()
-        getVideosAcao()
-        getVideosAnimacao()
-        getVideosComedia()
-        getVideosDocumentario()
-        getVideosDrama()
-        getVideosFamilia()
-        getVideosFiccaoCientifica()
-        getVideosPolicial()
-        getVideosRomance()
-        getVideosTerror()
     }, [])
 
     //get todos videos
     const fetchVideos = async () => {
         const res = await fetch('https://api-copycat.herokuapp.com/video')
-        const data = await res.json()
-        return data
-    }
-
-    const fetchVideosAcao = async () => {
-        const res = await fetch('https://api-copycat.herokuapp.com/video/categoria/Acao')
-        const data = await res.json()
-        return data
-    }
-
-    const fetchVideosAnimacao = async () => {
-        const res = await fetch('https://api-copycat.herokuapp.com/video/categoria/Animacao')
-        const data = await res.json()
-        return data
-    }
-
-    const fetchVideosComedia = async () => {
-        const res = await fetch('https://api-copycat.herokuapp.com/video/categoria/Comedia')
-        const data = await res.json()
-        return data
-    }
-
-    const fetchVideosPolicial = async () => {
-        const res = await fetch('https://api-copycat.herokuapp.com/video/categoria/Policial')
-        const data = await res.json()
-        return data
-    }
-
-    const fetchVideosDocumentario = async () => {
-        const res = await fetch('https://api-copycat.herokuapp.com/video/categoria/Documentario')
-        const data = await res.json()
-        return data
-    }
-
-    const fetchVideosDrama = async () => {
-        const res = await fetch('https://api-copycat.herokuapp.com/video/categoria/Drama')
-        const data = await res.json()
-        return data
-    }
-
-    const fetchVideosFiccaoCientifica = async () => {
-        const res = await fetch('https://api-copycat.herokuapp.com/video/categoria/Ficcao Cientifica')
-        const data = await res.json()
-        return data
-    }
-
-    const fetchVideosTerror = async () => {
-        const res = await fetch('https://api-copycat.herokuapp.com/video/categoria/Terror')
-        const data = await res.json()
-        return data
-    }
-
-    const fetchVideosFamilia = async () => {
-        const res = await fetch('https://api-copycat.herokuapp.com/video/categoria/Familia')
-        const data = await res.json()
-        return data
-    }
-
-    const fetchVideosRomance = async () => {
-        const res = await fetch('https://api-copycat.herokuapp.com/video/categoria/Romance')
         const data = await res.json()
         return data
     }
@@ -161,25 +53,25 @@ const AllVideoPage = () => {
                 <h1>Todos</h1>
                 <Videos videos={videos} />
                 <h1>Ação</h1>
-                <Videos videos={videosAcao} />
+                <Videos videos={useDisplayVideo('Acao')} />
                 <h1>Animação</h1>
-                <Videos videos={videosAnimacao} />
+                <Videos videos={useDisplayVideo('Animacao')} />
                 <h1>Comédia</h1>
-                <Videos videos={videosComedia} />
+                <Videos videos={useDisplayVideo('Comedia')} />
                 <h1>Policial</h1>
-                <Videos videos={videosPolicial} />
+                <Videos videos={useDisplayVideo('Policial')} />
                 <h1>Documentário</h1>
-                <Videos videos={videosDocumentario} />
+                <Videos videos={useDisplayVideo('Documentario')} />
                 <h1>Drama</h1>
-                <Videos videos={videosDrama} />
+                <Videos videos={useDisplayVideo('Drama')} />
                 <h1>Ficção Científica</h1>
-                <Videos videos={videosFiccaoCientifica} />
+                <Videos videos={useDisplayVideo('Ficcao Cientifica')} />
                 <h1>Terror</h1>
-                <Videos videos={videosTerror} />
+                <Videos videos={useDisplayVideo('Terror')} />
                 <h1>Família</h1>
-                <Videos videos={videosFamilia} />
+                <Videos videos={useDisplayVideo('Familia')} />
                 <h1>Romance</h1>
-                <Videos videos={videosRomance} />
+                <Videos videos={useDisplayVideo('Romance')} />
             </Layout>
         </div>
     )
