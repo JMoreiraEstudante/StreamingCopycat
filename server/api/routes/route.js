@@ -38,6 +38,22 @@ module.exports = function (app) {
         .route("/usuario/:id")
         .get(controller.idUsuarios)
 
+    // get post para usuario
+    app
+        .route("/contas")
+        .get(controller.todasContas)
+        .post(controller.addConta);
+
+    // get para usuario com certo id
+    app
+        .route("/conta/id/:id")
+        .get(controller.idConta)
+
+    // get para usuario com certo id
+    app
+        .route("/conta/user/:user")
+        .get(controller.userContas)
+
     // get post para lista
     app
         .route("/lista")

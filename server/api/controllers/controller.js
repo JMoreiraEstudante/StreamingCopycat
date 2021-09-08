@@ -2,6 +2,7 @@
 const User = require("../models/user");
 const Video = require("../models/video");
 const Lista = require("../models/lista");
+const Conta = require("../models/conta");
 
 // DEFINE CONTROLLER FUNCTIONS
 //pegando todas as listas
@@ -95,9 +96,39 @@ exports.todosUsuarios = (req, res) => {
     });
 };
 
-//pegando um user por nome
+//pegando um user por id
 exports.idUsuarios = (req, res) => {
     User.findOne({'_id':req.params.id}, (err, todo) => {
+        if (err) {
+            res.status(500).send(err);
+        }
+        res.status(200).json(todo);
+    });
+};
+
+//pegando todas as contas
+exports.todasContas = (req, res) => {
+    Conta.find({}, (err, todo) => {
+        if (err) {
+            res.status(500).send(err);
+        }
+        res.status(200).json(todo);
+    });
+};
+
+//pegando um conta por id
+exports.idConta = (req, res) => {
+    Conta.findOne({'_id':req.params.id}, (err, todo) => {
+        if (err) {
+            res.status(500).send(err);
+        }
+        res.status(200).json(todo);
+    });
+};
+
+//pegando todas as contas de um user
+exports.userContas = (req, res) => {
+    Conta.find({'user':req.params.user}, (err, todo) => {
         if (err) {
             res.status(500).send(err);
         }
@@ -119,6 +150,17 @@ exports.addVideo = (req, res) => {
 //adicioando um usuario
 exports.addUser = (req, res) => {
     let novo = new User(req.body);
+    novo.save((err, todo) => {
+        if (err) {
+            res.status(500).send(err);
+        }
+        res.status(201).json(todo);
+    });
+};
+
+//adicioando uma conta
+exports.addConta = (req, res) => {
+    let novo = new Conta(req.body);
     novo.save((err, todo) => {
         if (err) {
             res.status(500).send(err);
