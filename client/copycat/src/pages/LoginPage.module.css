@@ -1,0 +1,22 @@
+.page {
+    width:auto;
+    height: 100vh;
+}
+
+.registre {
+    text-align: center;
+}
+
+.registre a, .registre p  {
+    color: white;
+    opacity: 0.9;
+}
+
+.span {
+    font-weight:600;
+}
+
+.span:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}

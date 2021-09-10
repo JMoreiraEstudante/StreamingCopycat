@@ -1,11 +1,59 @@
 'use strict';
 
+const passport = require('passport');
+//verificar se está logado
+const isAuth = require('./authMiddleware').isAuth;
+
 // create App function
 module.exports = function (app) {
     var controller = require('../controllers/controller');
 
-    // todoList Routes
+    //authentication routes
+    //login
+    app.
+        route("/login")
+        .get((req, res, next) => {
 
+            const form = '<h1>Login Page</h1><form method="POST" action="/login">\
+            Enter Username:<br><input type="text" name="nome">\
+            <br>Enter Password:<br><input type="password" name="senha">\
+            <br><br><input type="submit" value="Submit"></form>';
+
+            res.send(form);
+
+        })
+        .post(passport.authenticate('local' ,{ failureRedirect: '/login-failure' }),
+            function (req, res) {
+                res.send(req.user);
+            }
+        );
+
+    app.
+        route("/login-failure")
+        .get((req, res, next) => {
+            res.status(401).json('Error');
+        })
+
+    app.
+        route("/logout")
+        .get((req, res, next) => {
+            req.logout();
+        });
+
+    //register
+    app.
+        route("/register")
+        .get((req, res, next) => {
+            const form = '<h1>Register Page</h1><form method="post" action="register">\
+                    Enter Username:<br><input type="text" name="nome">\
+                    <br>Enter Password:<br><input type="password" name="senha">\
+                    <br><br><input type="submit" value="Submit"></form>';
+
+            res.send(form);
+        })
+        .post(controller.addUser);
+
+    //react routes
     // get post para video
     app
         .route("/video")
@@ -29,27 +77,26 @@ module.exports = function (app) {
 
     // get post para usuario
     app
-        .route("/usuarios")
+        .route(isAuth, "/usuarios")
         .get(controller.todosUsuarios)
-        .post(controller.addUser);
 
     // get para usuario com certo id
     app
-        .route("/usuario/:id")
+        .route(isAuth, "/usuario/:id")
         .get(controller.idUsuarios)
 
-    // get post para usuario
+    // get post para conta
     app
         .route("/contas")
         .get(controller.todasContas)
         .post(controller.addConta);
 
-    // get para usuario com certo id
+    // get para conta com certo id
     app
         .route("/conta/id/:id")
         .get(controller.idConta)
 
-    // get para usuario com certo id
+    // get para conta com certo user
     app
         .route("/conta/user/:user")
         .get(controller.userContas)

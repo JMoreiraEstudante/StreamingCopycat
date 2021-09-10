@@ -4,7 +4,9 @@ const Video = require("../models/video");
 const Lista = require("../models/lista");
 const Conta = require("../models/conta");
 
-// DEFINE CONTROLLER FUNCTIONS
+//authentication
+const genPassword = require('../../lib/passwordUtils').genPassword;
+
 //pegando todas as listas
 exports.todasListas = (req, res) => {
     Lista.find({}, (err, todo) => {
@@ -17,7 +19,7 @@ exports.todasListas = (req, res) => {
 
 //pegando a lista de um certo usuario
 exports.userLista = (req, res) => {
-    Lista.findOne({'user':req.params.user}, (err, todo) => {
+    Lista.findOne({ 'user': req.params.user }, (err, todo) => {
         if (err) {
             res.status(500).send(err);
         }
@@ -58,7 +60,7 @@ exports.todosVideos = (req, res) => {
 
 //pegando todos os videos
 exports.nomeVideos = (req, res) => {
-    Video.find({'nome':req.params.nome}, (err, todo) => {
+    Video.find({ 'nome': req.params.nome }, (err, todo) => {
         if (err) {
             res.status(500).send(err);
         }
@@ -68,7 +70,7 @@ exports.nomeVideos = (req, res) => {
 
 //pegando um video
 exports.detailVideo = (req, res) => {
-    Video.findOne({'_id':req.params.id}, (err, todo) => {
+    Video.findOne({ '_id': req.params.id }, (err, todo) => {
         if (err) {
             res.status(500).send(err);
         }
@@ -78,7 +80,7 @@ exports.detailVideo = (req, res) => {
 
 //pegando todos os videos
 exports.categoriaVideos = (req, res) => {
-    Video.find({categoria: { $elemMatch: {$eq: req.params.categoria} }}, (err, todo) => {
+    Video.find({ categoria: { $elemMatch: { $eq: req.params.categoria } } }, (err, todo) => {
         if (err) {
             res.status(500).send(err);
         }
@@ -98,7 +100,7 @@ exports.todosUsuarios = (req, res) => {
 
 //pegando um user por id
 exports.idUsuarios = (req, res) => {
-    User.findOne({'_id':req.params.id}, (err, todo) => {
+    User.findOne({ '_id': req.params.id }, (err, todo) => {
         if (err) {
             res.status(500).send(err);
         }
@@ -118,7 +120,7 @@ exports.todasContas = (req, res) => {
 
 //pegando um conta por id
 exports.idConta = (req, res) => {
-    Conta.findOne({'_id':req.params.id}, (err, todo) => {
+    Conta.findOne({ '_id': req.params.id }, (err, todo) => {
         if (err) {
             res.status(500).send(err);
         }
@@ -128,7 +130,7 @@ exports.idConta = (req, res) => {
 
 //pegando todas as contas de um user
 exports.userContas = (req, res) => {
-    Conta.find({'user':req.params.user}, (err, todo) => {
+    Conta.find({ 'user': req.params.user }, (err, todo) => {
         if (err) {
             res.status(500).send(err);
         }
@@ -148,23 +150,34 @@ exports.addVideo = (req, res) => {
 };
 
 //adicioando um usuario
-exports.addUser = (req, res) => {
-    let novo = new User(req.body);
-    novo.save((err, todo) => {
+exports.addUser = (req, res, next) => {
+    const saltHash = genPassword(req.body.senha);
+
+    const salt = saltHash.salt;
+    const hash = saltHash.hash;
+
+    const newUser = new User({
+        username: req.body.nome,
+        hash: hash,
+        salt: salt,
+    });
+
+    newUser.save((err, todo) => {
         if (err) {
             res.status(500).send(err);
         }
         res.status(201).json(todo);
     });
-};
+}
 
 //adicioando uma conta
 exports.addConta = (req, res) => {
     let novo = new Conta(req.body);
-    novo.save((err, todo) => {
+    novo.save((err, conta) => {
         if (err) {
             res.status(500).send(err);
         }
-        res.status(201).json(todo);
+        //cria uma lista para esse user
+        Lista({ user: conta._id }).save().then(res.status(201).json(conta));
     });
 };

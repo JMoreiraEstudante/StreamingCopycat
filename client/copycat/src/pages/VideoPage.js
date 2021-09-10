@@ -21,6 +21,7 @@ const VideoPage = (props) => {
 
     //get video
     const fetchVideo = async () => {
+        console.log(videoCtx)
         const res = await fetch(`https://api-copycat.herokuapp.com/video/id/${videoCtx.video}`)
         const data = await res.json()
         return data
@@ -37,7 +38,6 @@ const VideoPage = (props) => {
                             {   
                                 width: '40vw', 
                                 minWidth: '320px',
-                                paddingTop: '25px',
                                 backgroundColor: 'white',
                                 opacity: '0.9',
                             }

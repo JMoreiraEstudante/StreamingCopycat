@@ -10,6 +10,7 @@ const Video = ({ video, list, updateList }) => {
 
     function toggleVideoSelected() {
         videoCtx.videoPick(video._id)
+        console.log(video)
     }
 
     return (

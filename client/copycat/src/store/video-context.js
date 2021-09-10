@@ -6,7 +6,7 @@ const VideoContext = createContext({
 })
 
 export function VideoContextProvider(props){
-    const [videoSelected, setVideoSelected] = useState([]);
+    const [videoSelected, setVideoSelected] = useState('');
 
     function videoPick(id) {
         setVideoSelected(id)
