@@ -13,7 +13,7 @@ const LoginPage = () => {
 
     //login
     const login = async (form) => {
-        const res = await fetch('http://localhost:3001/login', {
+        const res = await fetch('https://api-copycat.herokuapp.com/login', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
@@ -32,7 +32,7 @@ const LoginPage = () => {
 
     //register
     const register = async (form) => {
-        const res = await fetch('http://localhost:3001/register', {
+        const res = await fetch('https://api-copycat.herokuapp.com/register', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'

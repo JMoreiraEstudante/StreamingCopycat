@@ -33,7 +33,8 @@ app.use(function (req, res, next) {
  * -------------- SESSION SETUP ----------------
  */
 var store = new MongoDBStore({
-  Session
+  uri: "mongodb+srv://"+process.env.DB_USER+":"+process.env.DB_PASSWORD+"@clusterestudos.neryf.mongodb.net/Copycat?retryWrites=true&w=majority",
+  collection: 'Session'
 });
 
 app.use(session({

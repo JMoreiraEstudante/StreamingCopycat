@@ -19,14 +19,14 @@ const SelectUserPage = () => {
 
     //get todos
     const fetchUsers = async () => {
-        const res = await fetch(`http://localhost:3001/conta/user/${userCtx.login}`)
+        const res = await fetch(`https://api-copycat.herokuapp.com/conta/user/${userCtx.login}`)
         const data = await res.json()
         return data
     }
 
     //add conta
     const add = async (form) => {
-        const res = await fetch('http://localhost:3001/contas', {
+        const res = await fetch('https://api-copycat.herokuapp.com/contas', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
